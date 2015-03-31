@@ -28,7 +28,7 @@ public class SankeyDataGenerator extends BasicDataGenerator{
     }
 
     @Override
-    public String getGraph(String[] Edges_sqls) {
+    public String getGraph(String[] Edges_sqls,int filter) {
         Gson gson=new Gson();
         String json_graph="";
         List<URLNode> nodes;
@@ -43,6 +43,8 @@ public class SankeyDataGenerator extends BasicDataGenerator{
             //两个map用于存放（起点->index），（终点->index）的映射
             Map<String,Integer> startmap;
             Map<String,Integer> endmap=null;
+
+//            System.out.println(Arrays.toString(Edges_sqls));
 
             for(int i=0;i<Edges_sqls.length;i++){
                 //初始化map
@@ -61,6 +63,8 @@ public class SankeyDataGenerator extends BasicDataGenerator{
                     int count = rs.getInt(1);
                     String start_url = rs.getString(2);
                     String end_url = rs.getString(3);
+                    if(count<filter)
+                        continue;
                     if(!start_url.equals("nul")&&!end_url.equals("nul")){
                         if(i==0)
                             if(!startmap.containsKey(start_url))
@@ -81,6 +85,20 @@ public class SankeyDataGenerator extends BasicDataGenerator{
                     URLNode node=new URLNode(entry.getValue(),entry.getKey());
                     nodes.add(node);
                 }
+            }
+            //将nodes按照name排序
+            Collections.sort(nodes);
+            for(URLNode node:nodes){
+                int out=0;
+                int in=0;
+                for(StreamEdge link:links){
+                    if(link.getSource()==node.getName())
+                        out+=link.getValue();
+                    if(link.getTarget()==node.getName())
+                        in+=link.getValue();
+                }
+                node.setIn_degree(in);
+                node.setOut_degree(out);
             }
             graph=new SankeyGraph(nodes,links);
             json_graph=gson.toJson(graph);

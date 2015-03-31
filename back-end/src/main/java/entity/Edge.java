@@ -11,4 +11,12 @@ public class Edge {
         this.source=source;
         this.target=target;
     }
+
+    public int getSource(){
+        return source;
+    }
+
+    public int getTarget(){
+        return target;
+    }
 }

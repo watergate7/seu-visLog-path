@@ -11,24 +11,26 @@ public class SankeySqltransformer extends BasicSqltransformer {
 
     @Override
     public String[] NodesSqltransform() {
-        int loop=5;
-        String[] sqls=new String[loop];
-        for(int i=1;i<=loop;i++){
-            String sql="select distinct P"+i+" from streams;";
-            sqls[i-1]=sql;
+        int num=6;
+        int start_P=1;
+        String[] sqls=new String[num];
+        for(int i=start_P;i<num+start_P;i++){
+            String sql="select distinct P"+i+" from streams_str;";
+            sqls[i-start_P]=sql;
         }
         return sqls;
     }
 
     @Override
     public String[] EdgesSqltransform() {
-        int loop=4;
-        String[] sqls=new String[loop];
-        for(int i=1;i<=loop;i++){
+        int num=5;
+        int start_P=1;
+        String[] sqls=new String[num];
+        for(int i=start_P;i<num+start_P;i++){
             String start="P"+i;
             String end="P"+(i+1);
-            String sql="select count(*),"+start+","+end+" from streams group by "+start+","+end;
-            sqls[i-1]=sql;
+            String sql="select count(*),"+start+","+end+" from streams_str group by "+start+","+end;
+            sqls[i-start_P]=sql;
         }
         return sqls;
     }

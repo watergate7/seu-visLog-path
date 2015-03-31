@@ -33,5 +33,5 @@ public abstract class BasicDataGenerator {
 
     public abstract String getNodes(String[] sqls);
     public abstract String getEdges(String[] sqls);
-    public abstract String getGraph(String[] Edges_sqls);
+    public abstract String getGraph(String[] Edges_sqls,int filter);
 }

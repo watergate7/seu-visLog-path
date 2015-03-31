@@ -10,4 +10,8 @@ public class StreamEdge extends Edge{
         super(source,target);
         this.value=value;
     }
+
+    public int getValue(){
+        return value;
+    }
 }

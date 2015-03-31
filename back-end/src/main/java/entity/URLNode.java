@@ -5,8 +5,19 @@ package entity;
  */
 public class URLNode extends Node {
     protected String url;
-    public URLNode(int name,String url){
+    protected int out_degree;
+    protected int in_degree;
+
+    public URLNode(Integer name,String url){
         super(name);
         this.url=url;
+    }
+
+    public void setIn_degree(int in){
+        in_degree=in;
+    }
+
+    public void setOut_degree(int out){
+        out_degree=out;
     }
 }

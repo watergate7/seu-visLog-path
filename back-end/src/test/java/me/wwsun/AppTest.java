@@ -4,8 +4,8 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import junit.framework.TestCase;
-import me.wwsun.dao.LogDAO;
-import me.wwsun.service.LogService;
+import dao.LogDAO;
+import service.LogService;
 
 import java.net.UnknownHostException;
 
@@ -31,6 +31,7 @@ public class AppTest
         final DB siteDatabase = mongoClient.getDB("jiaodian");
         LogDAO logDAO = new LogDAO(siteDatabase);
         int length = logDAO.getSeperateSessions().size();
+        System.out.println(length);
         assertTrue(length>0);
     }
 
