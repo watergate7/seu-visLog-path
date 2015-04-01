@@ -1,10 +1,14 @@
 package DataGenerator;
 
 import com.google.gson.Gson;
+import dao.StreamDAO;
+import dao.URLDictDAO;
+import entity.SankeyCriteria;
 import entity.SankeyGraph;
 import entity.StreamEdge;
 import entity.URLNode;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -89,6 +93,8 @@ public class SankeyDataGenerator extends BasicDataGenerator{
             //将nodes按照name排序
             Collections.sort(nodes);
             for(URLNode node:nodes){
+                URLDictDAO dictDAO=new URLDictDAO("jdbc:mysql://localhost:3306","log_stream");
+                //计算每个node的出度和入度
                 int out=0;
                 int in=0;
                 for(StreamEdge link:links){
@@ -99,6 +105,10 @@ public class SankeyDataGenerator extends BasicDataGenerator{
                 }
                 node.setIn_degree(in);
                 node.setOut_degree(out);
+                //设置每个node的url和语义信息
+                String[] row=dictDAO.getDictRowbyId(node.getUrl_index());
+                node.setUrl(row[0]);
+                node.setSemantics(row[1]);
             }
             graph=new SankeyGraph(nodes,links);
             json_graph=gson.toJson(graph);
@@ -107,5 +117,35 @@ public class SankeyDataGenerator extends BasicDataGenerator{
             e.printStackTrace();
         }
         return json_graph;
+    }
+
+    public String getCriteria(int topk){
+        Gson gson=new Gson();
+        String crit="";
+        StreamDAO strDAO=new StreamDAO("jdbc:mysql://localhost:3306","log_stream");
+        List<String> topkdrop=strDAO.getTopkDrop(topk);
+        List<String> topkland=strDAO.getTopkLand(topk);
+        List<URLNode> highdrop=new ArrayList<URLNode>();
+        List<URLNode> mainland=new ArrayList<URLNode>();
+
+        for(String str:topkdrop){
+            String url=str.split(",")[0];
+            int count=Integer.parseInt(str.split(",")[1]);
+            URLNode node=new URLNode();
+            node.setUrl(url);
+            node.setDrop(count);
+            highdrop.add(node);
+        }
+
+        for(String str:topkland){
+            String url=str.split(",")[0];
+            int count=Integer.parseInt(str.split(",")[1]);
+            URLNode node=new URLNode();
+            node.setUrl(url);
+            node.setLand(count);
+            mainland.add(node);
+        }
+        crit=gson.toJson(new SankeyCriteria(highdrop,mainland));
+        return crit;
     }
 }

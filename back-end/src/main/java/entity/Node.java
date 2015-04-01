@@ -5,6 +5,9 @@ package entity;
  */
 public abstract class Node implements Comparable<Node>{
     protected Integer name;
+
+    public Node(){}
+
     public Node(int name){
         this.name=name;
     }

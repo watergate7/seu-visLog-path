@@ -111,8 +111,8 @@ public class Log2Stream {
                 iter.remove();
             }
             else{
-                if(stream.get(0)[url].equals("-"))
-                    stream.remove(0);
+//                if(stream.get(0)[url].equals("-"))
+//                    stream.remove(0);
                 String[] lastpoint=stream.get(stream.size()-1);
                 String[] point=new String[struc_size];
                 point[url]=lastpoint[go];
@@ -163,14 +163,19 @@ public class Log2Stream {
                     String[] empty={"nul","nul","nul","nul"};
                     for(List<String[]> stream:streams){
                         int size=stream.size();
+                        //保存路径的最后一个节点，便于计算
+                        String[] endP=null;
                         if(size<10){
+                            endP=stream.get(size-1);
                             for(int i=size;i<10;i++)
                                 stream.add(empty);
                         }
                         else if(size>10){
+                            endP=stream.get(9);
                             for(int i=size-1;i>=10;i--)
                                 stream.remove(i);
                         }
+                        stream.add(endP);
                     }
 
 //                    break;

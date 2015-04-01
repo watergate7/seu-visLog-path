@@ -10,7 +10,7 @@ public class LogDAO {
     private DBCollection log;
 
     public LogDAO(final DB siteDatabase) {
-        log = siteDatabase.getCollection("log1");
+        log = siteDatabase.getCollection("log");
     }
 
     /**
