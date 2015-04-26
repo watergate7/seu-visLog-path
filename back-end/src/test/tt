@@ -1,0 +1,398 @@
+{
+  "nodes": [
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 51.54787842869359,
+      "in_degree": 80.13441396068913,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.3567323215967985,
+      "depth": 1,
+      "name": 0
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 90.90032101917005,
+      "in_degree": 141.34261844853555,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.35687960208358604,
+      "depth": 1,
+      "name": 1
+    },
+    {
+      "url_index": "8106",
+      "url": "www.made-in-china.com/companysearch.do",
+      "semantics": "公司关键词搜索页",
+      "out_degree": 19.699637370065474,
+      "in_degree": 20.699637370065474,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.04831002505609773,
+      "depth": 1,
+      "name": 2
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 150.49212308327623,
+      "in_degree": 428.01199227792125,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.6483927417959889,
+      "depth": 0,
+      "name": 3
+    },
+    {
+      "url_index": "3159",
+      "url": "membercenter.made-in-china.com/company.do",
+      "semantics": "供应商VO",
+      "out_degree": 16.923775843986007,
+      "in_degree": 16.923775843986007,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 4
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 36.97619109536324,
+      "in_degree": 53.21878344684876,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.3052041271801618,
+      "depth": 2,
+      "name": 5
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 10.969813299576002,
+      "in_degree": 31.80609520652748,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.65510342504022,
+      "depth": 2,
+      "name": 6
+    },
+    {
+      "url_index": "8106",
+      "url": "www.made-in-china.com/companysearch.do",
+      "semantics": "公司关键词搜索页",
+      "out_degree": 24.913050011082895,
+      "in_degree": 25.913050011082895,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.03859059429794272,
+      "depth": 2,
+      "name": 7
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 5.386294361119891,
+      "in_degree": 28.60663436340758,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.8117117067078042,
+      "depth": 3,
+      "name": 8
+    }
+  ],
+  "links": [
+    {
+      "value": 15.230628663426062,
+      "source": 4,
+      "target": 0
+    },
+    {
+      "value": 18.699637370065478,
+      "source": 3,
+      "target": 2
+    },
+    {
+      "value": 51.76655144489139,
+      "source": 3,
+      "target": 1
+    },
+    {
+      "value": 10.579251212010101,
+      "source": 1,
+      "target": 7
+    },
+    {
+      "value": 11.430816798843313,
+      "source": 2,
+      "target": 6
+    },
+    {
+      "value": 21.566838920148538,
+      "source": 0,
+      "target": 5
+    },
+    {
+      "value": 11.724360886638692,
+      "source": 0,
+      "target": 7
+    },
+    {
+      "value": 15.8340456411678,
+      "source": 7,
+      "target": 8
+    }
+  ],
+  "highdrop": [
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 51.54787842869359,
+      "in_degree": 80.13441396068913,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.3567323215967985,
+      "depth": 1,
+      "name": 0
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 90.90032101917005,
+      "in_degree": 141.34261844853555,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.35687960208358604,
+      "depth": 1,
+      "name": 1
+    },
+    {
+      "url_index": "8106",
+      "url": "www.made-in-china.com/companysearch.do",
+      "semantics": "公司关键词搜索页",
+      "out_degree": 19.699637370065474,
+      "in_degree": 20.699637370065474,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.04831002505609773,
+      "depth": 1,
+      "name": 2
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 150.49212308327623,
+      "in_degree": 428.01199227792125,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.6483927417959889,
+      "depth": 0,
+      "name": 3
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 24.20683499283509,
+      "in_degree": 278.6917416426231,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.9131411829781578,
+      "depth": 0,
+      "name": 1173
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 36.97619109536324,
+      "in_degree": 53.21878344684876,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.3052041271801618,
+      "depth": 2,
+      "name": 5
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 10.969813299576002,
+      "in_degree": 31.80609520652748,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.65510342504022,
+      "depth": 2,
+      "name": 6
+    },
+    {
+      "url_index": "8106",
+      "url": "www.made-in-china.com/companysearch.do",
+      "semantics": "公司关键词搜索页",
+      "out_degree": 24.913050011082895,
+      "in_degree": 25.913050011082895,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.03859059429794272,
+      "depth": 2,
+      "name": 7
+    },
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 5.386294361119891,
+      "in_degree": 28.60663436340758,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.8117117067078042,
+      "depth": 3,
+      "name": 8
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 24.759819425652616,
+      "in_degree": 30.45296660621256,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.18694885310117906,
+      "depth": 3,
+      "name": 2526
+    }
+  ],
+  "mainland": [
+    {
+      "url_index": "3020",
+      "url": "www.made-in-china.com/",
+      "semantics": "MIC英文首页",
+      "out_degree": 150.49212308327623,
+      "in_degree": 428.01199227792125,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.6483927417959889,
+      "depth": 0,
+      "name": 3
+    },
+    {
+      "url_index": "3159",
+      "url": "membercenter.made-in-china.com/company.do",
+      "semantics": "供应商VO",
+      "out_degree": 16.923775843986007,
+      "in_degree": 16.923775843986007,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 4
+    },
+    {
+      "url_index": "409",
+      "url": "www.made-in-china.com/special/outrace-technology-co-ltd/",
+      "semantics": "奥其斯名企精品展",
+      "out_degree": 6.484906649788,
+      "in_degree": 12.178053830347945,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.46749236453303505,
+      "depth": 0,
+      "name": 750
+    },
+    {
+      "url_index": "4718",
+      "url": "membercenter.made-in-china.com/member/main/",
+      "semantics": "供应商VO",
+      "out_degree": 10.495265555937008,
+      "in_degree": 10.495265555937008,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 866
+    },
+    {
+      "url_index": "4720",
+      "url": "www.made-in-china.com/products-search/hot-china-products/Dredger.html",
+      "semantics": "Hot Searches产品",
+      "out_degree": 4.386294361119891,
+      "in_degree": 6.791759469228055,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.3541740721247255,
+      "depth": 0,
+      "name": 867
+    },
+    {
+      "url_index": "5529",
+      "url": "www.made-in-china.com/products/catlist/listsubcat/141/00/mic/Toys.html",
+      "semantics": "一级目录页",
+      "out_degree": 1.0,
+      "in_degree": 7.693147180559945,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.8700141858033171,
+      "depth": 0,
+      "name": 1017
+    },
+    {
+      "url_index": "602",
+      "url": "membercenter.made-in-china.com/product.do",
+      "semantics": "供应商VO",
+      "out_degree": 9.871201010907892,
+      "in_degree": 9.871201010907892,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 1112
+    },
+    {
+      "url_index": "6401",
+      "url": "www.made-in-china.com/productdirectory.do",
+      "semantics": "展示厅首页",
+      "out_degree": 24.20683499283509,
+      "in_degree": 278.6917416426231,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.9131411829781578,
+      "depth": 0,
+      "name": 1173
+    },
+    {
+      "url_index": "6816",
+      "url": "membercenter.made-in-china.com/user.do",
+      "semantics": "供应商VO",
+      "out_degree": 8.57507584059962,
+      "in_degree": 8.57507584059962,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 1341
+    },
+    {
+      "url_index": "8106",
+      "url": "www.made-in-china.com/companysearch.do",
+      "semantics": "公司关键词搜索页",
+      "out_degree": 14.508591395777199,
+      "in_degree": 14.508591395777199,
+      "drop": 0,
+      "land": 0,
+      "drop_per": 0.0,
+      "depth": 0,
+      "name": 1572
+    }
+  ]
+}

@@ -27,7 +27,7 @@ public class URLDictDAO {
         }
     }
 
-    public void finalize(){
+    public void disCon(){
         try{
             statement.close();
             conn.close();

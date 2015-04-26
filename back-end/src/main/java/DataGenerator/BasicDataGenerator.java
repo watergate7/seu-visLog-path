@@ -1,5 +1,7 @@
 package DataGenerator;
 
+import entity.Graph;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,7 +24,7 @@ public abstract class BasicDataGenerator {
         }
     }
 
-    protected void finalize(){
+    protected void disCon(){
         try{
             conn.close();
         }
@@ -33,5 +35,5 @@ public abstract class BasicDataGenerator {
 
     public abstract String getNodes(String[] sqls);
     public abstract String getEdges(String[] sqls);
-    public abstract String getGraph(String[] Edges_sqls,int filter);
+    public abstract Graph getGraph(String[] Edges_sqls,String[] Nodes_sqls);
 }

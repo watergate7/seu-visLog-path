@@ -1,7 +1,9 @@
 package dao;
 
 import com.mongodb.*;
-
+import entity.URLNode;
+import com.google.gson.Gson;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,12 @@ public class LogDAO {
 
     public LogDAO(final DB siteDatabase) {
         log = siteDatabase.getCollection("log");
+    }
+
+    public LogDAO(final String mongoURI,final String db) throws UnknownHostException{
+        MongoClient mongoClient = new MongoClient(new MongoClientURI(mongoURI));
+        DB siteDatabase = mongoClient.getDB(db);
+        log=siteDatabase.getCollection("log");
     }
 
     /**
@@ -56,5 +64,25 @@ public class LogDAO {
         cursor.close();
 
         return singleSessionSequence;
+    }
+
+    public String getPathBySession(String session){
+        Gson gson=new Gson();
+        List<DBObject> dbobjs=this.getSessionSequenceById(session);
+        ArrayList<URLNode> nodes=new ArrayList<URLNode>();
+        for(int i=0;i<dbobjs.size();i++){
+            DBObject ob=dbobjs.get(i);
+            URLNode node=new URLNode();
+            if(i==0){
+                URLNode first=new URLNode();
+                first.setUrl(ob.get("referer").toString());
+                first.setDatetime("-");
+                nodes.add(first);
+            }
+            node.setUrl(ob.get("request").toString());
+            node.setDatetime(ob.get("dateTime").toString());
+            nodes.add(node);
+        }
+        return  gson.toJson(nodes);
     }
 }

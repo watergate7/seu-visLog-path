@@ -4,7 +4,10 @@ import PathCal.Log2Stream;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2015/3/14.
  */
@@ -49,7 +52,7 @@ public class StreamDAO {
         }
     }
 
-    public void finalize(){
+    public void disCon(){
         try{
             statement.close();
             conn.close();
@@ -85,18 +88,68 @@ public class StreamDAO {
     //每个session写一次，有空再改成一个batch写一次
     public boolean insertStreams(List<ArrayList<String[]>> Streams,String session){
         try{
-            String sql = "insert into streams values (?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "insert into streams_t values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             pstmt = conn.prepareStatement(sql);
 
             for(List<String[]> stream:Streams){
+//                System.out.println("------------------------------------");
                 for(int i=0;i<stream.size();i++){
                     String[] point=stream.get(i);
+//                    System.out.println(Arrays.toString(point));
 //                    String value=point[Log2Stream.url];
-                    String value=point[Log2Stream.url].equals("nul")?"nul":dict.getUrlIndex(point[Log2Stream.url]).toString();
-                    pstmt.setString(i+1,value);
+                    if(point[Log2Stream.url].equals("nul"))
+                        pstmt.setObject(i + 1, null);
+                    else
+                        pstmt.setString(i+1,dict.getUrlIndex(point[Log2Stream.url]).toString());
+
+                    if(point[Log2Stream.dateTime].equals("nul"))
+                        pstmt.setObject(i+12,null);
+                    else
+                        pstmt.setString(i+12,point[Log2Stream.dateTime]);
                 }
-                pstmt.setString(12,session);
+                pstmt.setString(22,session);
                 pstmt.addBatch();
+            }
+            pstmt.executeBatch();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    //每一个batch写一次
+    public boolean insertBatchStreams(Map<String,List<ArrayList<String[]>>> BatchStreams){
+        try{
+            String sql = "insert into streams_all values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            pstmt = conn.prepareStatement(sql);
+
+            int k=0;
+            for(Map.Entry<String,List<ArrayList<String[]>>> entry:BatchStreams.entrySet()){
+                System.out.println("inserting:"+k++);
+                String session=entry.getKey();
+                List<ArrayList<String[]>> Streams=entry.getValue();
+
+                for(List<String[]> stream:Streams){
+//                System.out.println("------------------------------------");
+                    for(int i=0;i<stream.size();i++){
+                        String[] point=stream.get(i);
+//                    System.out.println(Arrays.toString(point));
+//                    String value=point[Log2Stream.url];
+                        if(point[Log2Stream.url].equals("nul"))
+                            pstmt.setObject(i + 1, null);
+                        else
+                            pstmt.setString(i+1,dict.getUrlIndex(point[Log2Stream.url]).toString());
+
+                        if(point[Log2Stream.dateTime].equals("nul"))
+                            pstmt.setObject(i+12,null);
+                        else
+                            pstmt.setString(i+12,point[Log2Stream.dateTime]);
+                    }
+                    pstmt.setString(22,session);
+                    pstmt.addBatch();
+                }
             }
             pstmt.executeBatch();
         }
@@ -110,7 +163,7 @@ public class StreamDAO {
     public List<String> getTopkDrop(int k){
         List<String> topk=new ArrayList<String>();
         try{
-            String sql = "select count(*) as c,P_end,dict.url from streams,dict where streams.P_end=dict.id group by P_end order by c desc limit "+k+";";
+            String sql = "select count(*) as c,P_end,dict.url from streams_t,dict where streams_t.P_end=dict.id group by P_end order by c desc limit "+k+";";
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next()) {
                 int count=rs.getInt(1);
@@ -125,49 +178,69 @@ public class StreamDAO {
         return topk;
     }
 
+//    存储的路径起始点不都为站内页面的情况，需要比较P1和P2
+//    public List<String> getTopkLand(int k){
+//        List<String> topk1=new ArrayList<String>();
+//        List<String> topk2=new ArrayList<String>();
+//        List<String> topk=new ArrayList<String>();
+//        try{
+//            String sql1 = "select count(*) c,P1,dict.url from streams_t,dict where P1=dict.id and dict.url like" +
+//                    " '%made-in-china%' group by P1 order by c desc limit " + k +";";
+//            ResultSet rs1 = statement.executeQuery(sql1);
+//            while(rs1.next()) {
+//                int count=rs1.getInt(1);
+//                String url=rs1.getString(3);
+//                String str=url+","+String.valueOf(count);
+//                topk1.add(str);
+//            }
+//
+//            String sql2 = "select count(*) c,d2.url,d1.url " +
+//                    "from streams s join dict d2 " +
+//                    "on s.P2=d2.id " +
+//                    "left join dict d1 " +
+//                    "on s.P1=d1.id " +
+//                    "where d1.url not" +
+//                    " like '%made-in-china%' group by s.P2 order by c desc limit "+k+";";
+//            ResultSet rs2 = statement.executeQuery(sql2);
+//            while(rs2.next()) {
+//                int count=rs2.getInt(1);
+//                String url=rs2.getString(2);
+//                String str=url+","+String.valueOf(count);
+//                topk2.add(str);
+//            }
+//            int i=10;
+//            int cursor1=0;
+//            int cursor2=0;
+//            while(i-->0){
+//                int k1=Integer.parseInt(topk1.get(cursor1).split(",")[1]);
+//                int k2=Integer.parseInt(topk2.get(cursor2).split(",")[1]);
+//                if(k1>=k2){
+//                    topk.add(topk1.get(cursor1));
+//                    cursor1++;
+//                }
+//                else{
+//                    topk.add(topk2.get(cursor2));
+//                    cursor2++;
+//                }
+//            }
+//        }
+//        catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//        return topk;
+//    }
+
     public List<String> getTopkLand(int k){
-        List<String> topk1=new ArrayList<String>();
-        List<String> topk2=new ArrayList<String>();
         List<String> topk=new ArrayList<String>();
         try{
-            String sql1 = "select count(*) c,P1,dict.url from streams,dict where P1=dict.id and dict.url like" +
+            String sql = "select count(*) c,P1,dict.url from streams_t,dict where P1=dict.id and dict.url like" +
                     " '%made-in-china%' group by P1 order by c desc limit " + k +";";
-            ResultSet rs1 = statement.executeQuery(sql1);
-            while(rs1.next()) {
-                int count=rs1.getInt(1);
-                String url=rs1.getString(3);
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()) {
+                int count=rs.getInt(1);
+                String url=rs.getString(3);
                 String str=url+","+String.valueOf(count);
-                topk1.add(str);
-            }
-
-            String sql2 = "select count(*) c,d2.url,d1.url " +
-                    "from streams s join dict d2 " +
-                    "on s.P2=d2.id " +
-                    "left join dict d1 " +
-                    "on s.P1=d1.id " +
-                    "where d1.url not" +
-                    " like '%made-in-china%' group by s.P2 order by c desc limit "+k+";";
-            ResultSet rs2 = statement.executeQuery(sql2);
-            while(rs2.next()) {
-                int count=rs2.getInt(1);
-                String url=rs2.getString(2);
-                String str=url+","+String.valueOf(count);
-                topk2.add(str);
-            }
-            int i=10;
-            int cursor1=0;
-            int cursor2=0;
-            while(i-->0){
-                int k1=Integer.parseInt(topk1.get(cursor1).split(",")[1]);
-                int k2=Integer.parseInt(topk2.get(cursor2).split(",")[1]);
-                if(k1>=k2){
-                    topk.add(topk1.get(cursor1));
-                    cursor1++;
-                }
-                else{
-                    topk.add(topk2.get(cursor2));
-                    cursor2++;
-                }
+                topk.add(str);
             }
         }
         catch(SQLException e){
@@ -175,4 +248,5 @@ public class StreamDAO {
         }
         return topk;
     }
+
 }

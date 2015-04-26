@@ -8,6 +8,10 @@ public abstract class Node implements Comparable<Node>{
 
     public Node(){}
 
+    public void setName(Integer name) {
+        this.name = name;
+    }
+
     public Node(int name){
         this.name=name;
     }

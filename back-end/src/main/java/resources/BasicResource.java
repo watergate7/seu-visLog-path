@@ -13,7 +13,7 @@ public class BasicResource {
     protected String uri;
     protected String db;
 
-    BasicResource(){
+    public BasicResource(String URI,String DB){
         Properties p = new Properties();
         try {
             InputStream in = new BufferedInputStream(new FileInputStream(fileName));
@@ -22,7 +22,9 @@ public class BasicResource {
         catch (Exception e){
             e.printStackTrace();
         }
-        uri=p.getProperty("Mysql_URI");
-        db=p.getProperty("Mysql_DB");
+//        uri=p.getProperty("Mysql_URI");
+//        db=p.getProperty("Mysql_DB");
+        uri=p.getProperty(URI);
+        db=p.getProperty(DB);
     }
 }

@@ -7,26 +7,28 @@ public class URLNode extends Node {
     protected String url_index;
     protected String url;
     protected String semantics;
-    protected int out_degree;
-    protected int in_degree;
+    protected double out_degree;
+    protected double in_degree;
     protected int drop;
     protected int land;
+    protected double drop_per;
+    protected String datetime;
+    protected int depth;
 
-    public void setLand(int land) {
-        this.land = land;
+    public double getDrop_per() {
+        return drop_per;
     }
 
-    public int getDrop() {
-        return drop;
+    public void setDrop_per(double drop_per) {
+        this.drop_per = drop_per;
     }
 
-    public int getLand() {
-        return land;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setDrop(int drop) {
-        this.drop = drop;
-
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public URLNode(){}
@@ -44,15 +46,32 @@ public class URLNode extends Node {
         this.semantics=semantics;
     }
 
-    public void setIn_degree(int in){
+    public void setIn_degree(double in){
         in_degree=in;
     }
 
-    public void setOut_degree(int out){
+    public void setOut_degree(double out){
         out_degree=out;
     }
 
     public void setUrl(String url){
         this.url=url;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+
+    public double getIn_degree() {
+        return in_degree;
+    }
+
+    public double getOut_degree() {
+        return out_degree;
     }
 }
